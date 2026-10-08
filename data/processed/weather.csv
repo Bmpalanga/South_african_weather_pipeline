@@ -1,0 +1,10 @@
+city,timestamp,temperature_c,humidity_percent,wind_speed_kmh
+east_london,2026-10-08T10:00,25.0,61,4.6
+durban,2026-10-08T10:00,24.8,62,19.7
+johannesburg,2026-10-08T10:00,22.6,51,15.4
+mbombela,2026-10-08T10:00,25.2,64,8.2
+cape_town,2026-10-08T10:00,17.0,58,12.4
+bloemfontein,2026-10-08T10:00,26.2,37,15.2
+pretoria,2026-10-08T10:00,26.2,38,10.2
+gqeberha,2026-10-08T10:00,20.7,76,11.6
+polokwane,2026-10-08T10:00,24.2,49,14.9
