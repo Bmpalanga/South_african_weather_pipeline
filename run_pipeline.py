@@ -6,13 +6,13 @@ from scripts.load import main as load
 def main():
     print("Starting weather data pipeline...")
 
-    print("\n--- Extract ---")
+    print("\n--- Extracting weather data ---")
     extract()
 
-    print("\n--- Transform ---")
+    print("\n--- Transforming weather data---")
     transform()
 
-    print("\n--- Load ---")
+    print("\n--- Loading weather data ---")
     load()
 
     print("\nPipeline completed successfully!")
