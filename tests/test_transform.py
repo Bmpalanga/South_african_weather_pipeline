@@ -191,3 +191,47 @@ def test_transform_skips_missing_values():
             records = transform_weather_data()
 
     assert records == []
+
+def test_transform_skips_nan_temperature():
+    fake_weather_data = {
+        "current": {
+            "time": "2026-10-14T10:00",
+            "temperature_2m": float("nan"),
+            "relative_humidity_2m": 50,
+            "wind_speed_10m": 12.0
+        }
+    }
+
+    with patch(
+        "pathlib.Path.glob",
+        return_value=[Path("data/raw/cape_town_test.json")]
+    ):
+        with patch(
+            "scripts.transform.load_weather_file",
+            return_value=fake_weather_data
+        ):
+            records = transform_weather_data()
+
+    assert records == []
+
+def test_transform_skips_invalid_temperature_type():
+    fake_weather_data = {
+        "current": {
+            "time": "2026-10-14T10:00",
+            "temperature_2m": "unknown",
+            "relative_humidity_2m": 50,
+            "wind_speed_10m": 12.0
+        }
+    }
+
+    with patch(
+        "pathlib.Path.glob",
+        return_value=[Path("data/raw/cape_town_test.json")]
+    ):
+        with patch(
+            "scripts.transform.load_weather_file",
+            return_value=fake_weather_data
+        ):
+            records = transform_weather_data()
+
+    assert records == []

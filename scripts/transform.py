@@ -30,8 +30,25 @@ def transform_weather_data():
             "wind_speed_kmh": current["wind_speed_10m"]
         }
 
-        if any(value is None for value in record.values()):
-            print(f"Warning: Missing value for {city}. Skipping record.")
+        numeric_values = [
+            record["temperature_c"],
+            record["humidity_percent"],
+            record["wind_speed_kmh"]
+        ]
+
+        if any(
+            not isinstance(value, (int, float))
+            or pd.isna(value)
+            for value in numeric_values
+        ):
+            print(
+                f"Warning: Missing or invalid numeric value "
+                f"for {city}. Skipping record."
+            )
+            continue
+
+        if record["timestamp"] is None or pd.isna(record["timestamp"]):
+            print(f"Warning: Missing timestamp for {city}. Skipping record.")
             continue
         
         if not 0 <= record["humidity_percent"] <= 100:
