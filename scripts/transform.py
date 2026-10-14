@@ -30,6 +30,22 @@ def transform_weather_data():
             "wind_speed_kmh": current["wind_speed_10m"]
         }
 
+        if any(value is None for value in record.values()):
+            print(f"Warning: Missing value for {city}. Skipping record.")
+            continue
+        
+        if not 0 <= record["humidity_percent"] <= 100:
+           print(f"Warning: Invalid humidity for {city}. Skipping record.")
+           continue
+
+        if not -90 <= record["temperature_c"] <= 60:
+           print(f"Warning: Invalid temperature for {city}. Skipping record.")
+           continue
+
+        if record["wind_speed_kmh"] < 0:
+           print(f"Warning: Invalid wind speed for {city}. Skipping record.")
+           continue
+
         records.append(record)
 
     dataframe = pd.DataFrame(records)
