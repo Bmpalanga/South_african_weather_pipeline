@@ -11,5 +11,6 @@ __pycache__/
 # SQLite database
 *.db__
 
+# Generated weather data
 data/raw/
 data/processed/
