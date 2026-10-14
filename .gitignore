@@ -9,7 +9,7 @@ __pycache__/
 .pytest_cache/
 
 # SQLite database
-*.db__
+*.db
 
 # Generated weather data
 data/raw/
