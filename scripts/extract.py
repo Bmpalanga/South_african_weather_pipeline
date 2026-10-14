@@ -26,20 +26,32 @@ def fetch_weather(city, latitude, longitude):
         ]
     }
 
-    try:
-        response = requests.get(
-            API_URL,
-            params=params,
-            timeout=30
-        )
+    max_retries = 3
 
-        response.raise_for_status()
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = requests.get(
+                API_URL,
+                params=params,
+                timeout=30
+            )
 
-        return response.json()
+            response.raise_for_status()
 
-    except requests.exceptions.RequestException as error:
-        print(f"Failed to get weather for {city}: {error}")
-        return None
+            return response.json()
+
+        except requests.exceptions.RequestException as error:
+            print(
+                f"Attempt {attempt}/{max_retries} failed "
+                f"for {city}: {error}"
+            )
+
+            if attempt < max_retries:
+                import time
+                time.sleep(2)
+
+    print(f"Giving up on {city} after {max_retries} attempts.")
+    return None
 
 
 def save_raw_data(city, weather_data):
