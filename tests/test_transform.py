@@ -26,31 +26,6 @@ def test_transform_removes_duplicates():
 
     assert len(unique_records) == len(records)
 
-    from scripts.transform import transform_weather_data
-
-
-def test_transform_weather_data():
-    records = transform_weather_data()
-
-    assert len(records) > 0
-
-    for record in records:
-        assert "city" in record
-        assert "timestamp" in record
-        assert "temperature_c" in record
-        assert "humidity_percent" in record
-        assert "wind_speed_kmh" in record
-
-
-def test_transform_removes_duplicates():
-    records = transform_weather_data()
-
-    unique_records = {
-        (record["city"], record["timestamp"])
-        for record in records
-    }
-
-    assert len(unique_records) == len(records)
 
 def test_humidity_must_be_between_0_and_100():
     valid_humidity_values = [0, 45, 100]
@@ -73,6 +48,7 @@ def test_temperature_must_be_within_valid_range():
     for temperature in invalid_temperatures:
         assert not -90 <= temperature <= 60
 
+
 def test_wind_speed_must_not_be_negative():
     valid_wind_speeds = [0, 10, 20.5]
     invalid_wind_speeds = [-1, -5]
@@ -82,6 +58,7 @@ def test_wind_speed_must_not_be_negative():
 
     for wind_speed in invalid_wind_speeds:
         assert not wind_speed >= 0
+
 
 def test_weather_record_has_no_missing_values():
     valid_record = {
@@ -94,6 +71,7 @@ def test_weather_record_has_no_missing_values():
 
     assert all(value is not None for value in valid_record.values())
 
+
 def test_transform_skips_invalid_humidity():
     fake_weather_data = {
         "current": {
@@ -105,10 +83,6 @@ def test_transform_skips_invalid_humidity():
     }
 
     with patch(
-    "scripts.transform.RAW_DIR",
-    new=Path("data/raw")
-):
-     with patch(
         "pathlib.Path.glob",
         return_value=[Path("data/raw/cape_town_test.json")]
     ):
@@ -117,14 +91,9 @@ def test_transform_skips_invalid_humidity():
             return_value=fake_weather_data
         ):
             records = transform_weather_data()
-        
-        with patch(
-            "scripts.transform.load_weather_file",
-            return_value=fake_weather_data
-        ):
-            records = transform_weather_data()
 
     assert records == []
+
 
 def test_transform_skips_invalid_temperature():
     fake_weather_data = {
@@ -148,6 +117,7 @@ def test_transform_skips_invalid_temperature():
 
     assert records == []
 
+
 def test_transform_skips_invalid_wind_speed():
     fake_weather_data = {
         "current": {
@@ -169,6 +139,7 @@ def test_transform_skips_invalid_wind_speed():
             records = transform_weather_data()
 
     assert records == []
+
 
 def test_transform_skips_missing_values():
     fake_weather_data = {
@@ -192,6 +163,7 @@ def test_transform_skips_missing_values():
 
     assert records == []
 
+
 def test_transform_skips_nan_temperature():
     fake_weather_data = {
         "current": {
@@ -213,6 +185,7 @@ def test_transform_skips_nan_temperature():
             records = transform_weather_data()
 
     assert records == []
+
 
 def test_transform_skips_invalid_temperature_type():
     fake_weather_data = {
