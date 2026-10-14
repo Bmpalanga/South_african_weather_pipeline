@@ -1,0 +1,16 @@
+o
+x# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Pytest cache
+.pytest_cache/
+
+# SQLite database
+*.db
+
+data/raw/
+data/processed/

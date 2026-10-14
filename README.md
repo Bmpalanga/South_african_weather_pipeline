@@ -72,7 +72,7 @@ The pipeline collects weather observations for:
 
 ## 5. Project Structure
 
-```text
+
 South_african_weather_pipeline/
 ├── config/
 │   └── config.json

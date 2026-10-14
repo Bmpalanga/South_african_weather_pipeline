@@ -5,11 +5,11 @@
 __pycache__/
 *.pyc
 
-# Pytest cache
+# Pytest cache__
 .pytest_cache/
 
 # SQLite database
-*.db
+*.db__
 
 data/raw/
 data/processed/
