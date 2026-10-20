@@ -1,15 +1,10 @@
-# South_african_weather_pipeline
+# South African Weather Pipeline
 
 ## 1. Project Overview
 
-This project is a Python data engineering pipeline that collects
-weather data for nine cities in South Africa using the Open-Meteo API.
+This project is a Python data engineering pipeline that collects weather data for nine cities in South Africa using the Open-Meteo API.
 
-The pipeline follows the Extract, Transform, Load (ETL) process.
-
-It collects weather observations, transforms the data into a
-structured format, stores the results in an SQLite database,
-and analyses weather conditions across the selected cities.
+The pipeline follows the Extract, Transform, Load (ETL) process. It collects weather observations, transforms the data into a structured format, stores the results in an SQLite database, and analyses weather conditions across the selected cities.
 
 ## 2. Project Objectives
 
@@ -46,33 +41,40 @@ The pipeline collects weather observations for:
 7. East London
 8. Polokwane
 9. Mbombela
-
-## Installation and setup
-
-# Creating virtual enevironment
--python3 -m venv .venv
-
-# activatin environment on Linux
--source .venv/bin/activate
-
-# installing project dependencies
--python -m pip install -r requirements.txt
-
-# running pipeline
--python run_pipeline.py
-
-# running tests
--python -m pytest
-
-## Data Storage
-1. JSON for raw API responses
-2. CSV for processed weather observations
-3. SQLite for structured database storage
+ 
 
 
-## 5. Project Structure
+## 5. Installation and Setup
 
+### Create a virtual environment
 
+```bash
+python3 -m venv .venv
+
+# Install project dependencies
+python -m pip install -r requirements.txt
+
+# Run the weather pipeline
+python run_pipeline.py
+
+# Start the Jupyter pipeline
+jupyter notebook
+
+# If the browser does not open automatically ,use:
+jupyter notebook --no-browser
+
+# Run automated tests
+python -m pytest
+
+```
+## 6. Data storage
+
+The project uses the following storage formats:
+> JSON: raw API responses
+> CSV  : Processed weather observations
+> SQLITE : Structured weather data stored in a database
+
+### Project structure
 South_african_weather_pipeline/
 ├── config/
 │   └── config.json
@@ -83,7 +85,6 @@ South_african_weather_pipeline/
 ├── database/
 │   └── weather.db
 ├── notebooks/
-│   └── weather_analysis.ipynb
 ├── scripts/
 │   ├── __init__.py
 │   ├── extract.py
@@ -91,11 +92,12 @@ South_african_weather_pipeline/
 │   └── load.py
 ├── tests/
 │   ├── test_load.py
+│   ├── test_pipeline.py
 │   └── test_transform.py
 ├── run_pipeline.py
 ├── requirements.txt
 ├── pytest.ini
 └── README.md
 
-## Tracking work progress
-WTC-ENMDPD4G
+## Project Tracking
+WeThinkCode activity ID : WTC-ENMDPD4G
